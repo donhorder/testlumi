@@ -28,7 +28,124 @@
   <meta property="og:description" content="Peep-peep! I'm Lumi, and I am here to help you with all your eco-friendly endeavors!">
   <meta property="og:image" content="/sharing.jpg">
   <meta property="og:image:alt" content="Lumi">
-<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="df9de007-1934-43aa-af7b-3e1901c9f630" data-blockingmode="auto" type="text/javascript"></script>	  
+  <style>
+    /* Customizable colors */
+    :root {
+      --banner-background-color: #333;
+      --button-background-color: #007bff;
+      --button-hover-color: #0056b3;
+      --button-press-color: #003080;
+      --button-text-color: #fff;
+      --banner-text-color: #fff;
+    }
+
+    /* Banner styles */
+    #cookieConsentBanner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background-color: var(--banner-background-color);
+      color: var(--banner-text-color);
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 24px 24px 0 0;
+      font-family: sans-serif;
+    }
+
+    /* Title styles */
+    #cookieConsentBanner h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    /* Message styles */
+    #cookieConsentBanner p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    /* Button styles */
+    #cookieConsentBanner button {
+      background-color: var(--button-background-color);
+      color: var(--button-text-color);
+      padding: 8px 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+    }
+
+    /* Hover state */
+    #cookieConsentBanner button:hover {
+      background-color: var(--button-hover-color);
+    }
+
+    /* Pressed state */
+    #cookieConsentBanner button:active {
+      background-color: var(--button-press-color);
+    }
+  </style>
+  <script type="text/javascript">
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+      var expires = "";
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    // Function to get a cookie
+    function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ')
+          c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0)
+          return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    // Function to handle user's consent
+    function acceptConsent() {
+      setCookie("cookieConsent", "true", 365);
+      hideBanner();
+    }
+
+    function declineConsent() {
+      setCookie("cookieConsent", "false", 365);
+      hideBanner();
+    }
+
+    function hideBanner() {
+      document.getElementById("cookieConsentBanner").style.display = "none";
+    }
+
+    window.onload = function() {
+      if (!getCookie("cookieConsent")) {
+        var bannerHtml = '<div id="cookieConsentBanner">' +
+          '<h2 class="font-class">Lumi eats... uses cookies!</h2>' +
+          '<p class="font-class">This website uses cookies to ensure you get the best experience.</p>' +
+          '<button onclick="acceptConsent()">Accept</button>' +
+          '<span onclick="declineConsent()" style="cursor: pointer;">Decline</span>' +
+          '</div>';
+        var head = document.getElementsByTagName("head")[0];
+        var style = document.createElement("style");
+        style.innerHTML = '#cookieConsentBanner { display: flex !important; }';
+        head.appendChild(style);
+        document.body.insertAdjacentHTML('beforeend', bannerHtml);
+      }
+    };
+  </script>	  
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HLCG3B1ZBQ"></script>
 <script>
